@@ -1,30 +1,30 @@
-import { defineConfig } from 'vite';
-import { globSync } from 'glob';
+import {defineConfig} from 'vite';
+import {globSync} from 'glob';
 
-{% - if cookiecutter.ui_library == 'Tailwind' %}
+{%- if cookiecutter.ui_library == 'Tailwind' %}
 import tailwindcss from '@tailwindcss/vite';
-{% - endif %}
+{%- endif %}
 
 import path from 'node:path'
 
 
 export default defineConfig({
     base: '/static/',
-    {% - if cookiecutter.ui_library == 'Tailwind' %}
-plugins: [
-    tailwindcss()
-],
-    {% - endif %}
-build: {
-    outDir: 'dist',
+    {%- if cookiecutter.ui_library == 'Tailwind' %}
+    plugins: [
+        tailwindcss()
+    ],
+    {%- endif %}
+    build: {
+        outDir: 'dist',
         manifest: true,
-            rollupOptions: {
-        input: Object.fromEntries(
-            globSync('{{cookiecutter.slug}}/static/js/**/*.js').map(file => [
-                path.relative('{{cookiecutter.slug}}/static/js', file).replace(/\.js$/, ''),
-                file,
-            ])
-        )
+        rollupOptions: {
+            input: Object.fromEntries(
+                globSync('{{cookiecutter.slug}}/static/js/**/*.js').map(file => [
+                    path.relative('{{cookiecutter.slug}}/static/js', file).replace(/\.js$/, ''),
+                    file,
+                ])
+            )
+        },
     },
-},
 });
