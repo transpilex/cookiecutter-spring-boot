@@ -27,8 +27,8 @@ Answer the prompts with your own desired [options] For example:
     remote: Total 550 (delta 283), reused 479 (delta 222)
     Receiving objects: 100% (550/550), 127.66 KiB | 58 KiB/s, done.
     Resolving deltas: 100% (283/283), done.
-    project_name [My Awesome Project]: Reddit Clone
-    project_slug [reddit_clone]: reddit
+    name [My Awesome Project]: Reddit Clone
+    slug [reddit_clone]: reddit
     description []: A reddit clone.
     version [1.0.0]: 0.0.1
     Select ui_library:

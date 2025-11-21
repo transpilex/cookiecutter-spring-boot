@@ -1,6 +1,6 @@
 {
-  "project_name": "My Awesome Project",
-  "project_slug": "{{ cookiecutter.project_name.lower()|replace(' ', '-')|replace('.', '-')|trim() }}",
+  "name": "My Awesome Project",
+  "slug": "{{ cookiecutter.name.lower()|replace(' ', '-')|replace('.', '-')|trim() }}",
   "description": "",
   "version": "1.0.0",
   "ui_library": [
@@ -15,8 +15,8 @@
   ],
   "has_plugins_config": "n",
   "_copy_without_render": [
-    "{{cookiecutter.project_slug}}/src/main/resources/templates",
-    "{{cookiecutter.project_slug}}/src/main/resources/static",
-    "{{cookiecutter.project_slug}}/.mvn"
+    "{{cookiecutter.slug}}/src/main/resources/templates",
+    "{{cookiecutter.slug}}/src/main/resources/static",
+    "{{cookiecutter.slug}}/.mvn"
   ]
 }

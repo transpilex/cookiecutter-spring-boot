@@ -9,11 +9,11 @@ SUCCESS = "\x1b[1;32m [SUCCESS]: "
 # The content of this string is evaluated by Jinja, and plays an important role.
 # It updates the cookiecutter context to trim leading and trailing spaces
 
-project_slug = "{{ cookiecutter.project_slug }}"
+slug = "{{ cookiecutter.slug }}"
 slug_regex = re.compile(r"^[a-z0-9-]+$")
 
-if slug_regex.match(project_slug) is None:
+if slug_regex.match(slug) is None:
     assert False, (
-        f"'{project_slug}' is not a valid project slug. "
+        f"'{slug}' is not a valid project slug. "
         "It must contain only lowercase letters, numbers or hyphens (-)."
     )

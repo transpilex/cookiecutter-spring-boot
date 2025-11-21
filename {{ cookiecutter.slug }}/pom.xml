@@ -9,9 +9,9 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.example</groupId>
-	<artifactId>{{ cookiecutter.project_slug }}</artifactId>
+	<artifactId>{{ cookiecutter.slug }}</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>{{ cookiecutter.project_slug }}</name>
+	<name>{{ cookiecutter.slug }}</name>
 	<description>{{ cookiecutter.description }}</description>
 	<url/>
 	<licenses>

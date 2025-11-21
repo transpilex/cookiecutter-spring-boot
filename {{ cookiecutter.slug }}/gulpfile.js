@@ -1,5 +1,5 @@
 // Gulp and package
-const {src, dest, parallel, series, watch} = require('gulp');
+const { src, dest, parallel, series, watch } = require('gulp');
 
 // Plugins
 const autoprefixer = require('autoprefixer');
@@ -12,39 +12,39 @@ const rename = require('gulp-rename');
 const gulUglifyES = require('gulp-uglify-es');
 const npmdist = require('gulp-npm-dist');
 const replace = require('gulp-replace');
-{%- if cookiecutter.ui_library == 'Tailwind' %}
+{% - if cookiecutter.ui_library == 'Tailwind' %}
 const tailwindcss = require('@tailwindcss/postcss');
-{%- else %}
+{% - else %}
 const gulpSass = require('gulp-sass');
 const dartSass = require('sass');
 const tildeImporter = require('node-sass-tilde-importer');
 const rtlcss = require('gulp-rtlcss');
 const sass = gulpSass(dartSass);
 const uglify = gulUglifyES.default;
-{%- endif %}
+{% - endif %}
 
 
-{%- if cookiecutter.has_plugins_config == 'y' %}
+{% - if cookiecutter.has_plugins_config == 'y' %}
 const pluginFile = require("./plugins.config"); // Import the plugins list
-{%- else %}
+{% - else %}
 const pluginFile = {
     vendorsCSS: [],
     vendorsJS: []
 }
-{%- endif %}
+{% - endif %}
 
 
 const paths = {
-    baseDistAssets: "{{ cookiecutter.project_slug }}/static", // build assets directory
-    baseSrcAssets: "{{ cookiecutter.project_slug }}/static",   // source assets directory
+    baseDistAssets: "{{ cookiecutter.slug }}/static", // build assets directory
+    baseSrcAssets: "{{ cookiecutter.slug }}/static",   // source assets directory
 };
 
-{%- if cookiecutter.has_plugins_config == 'y' %}
+{% - if cookiecutter.has_plugins_config == 'y' %}
 // Copying Third Party Plugins Assets
 const plugins = function () {
     const out = paths.baseDistAssets + "/plugins/";
 
-    pluginFile.forEach(({name, vendorsJS, vendorCSS, vendorFonts, assets, fonts, font, media, img, webfonts}) => {
+    pluginFile.forEach(({ name, vendorsJS, vendorCSS, vendorFonts, assets, fonts, font, media, img, webfonts }) => {
 
         const handleError = (label, files) => (err) => {
             const shortMsg = err.message.split('\n')[0];
@@ -61,10 +61,10 @@ const plugins = function () {
 
         if (vendorCSS) {
             src(vendorCSS)
-              .pipe(concat("vendors.min.css"))
-              .on('error', handleError('vendorCSS'))
-              .pipe(replace(/url\((['"]?)(remixicon|boxicons)/g, "url($1fonts/$2"))
-              .pipe(dest(paths.baseDistAssets + "/css/"));
+                .pipe(concat("vendors.min.css"))
+                .on('error', handleError('vendorCSS'))
+                .pipe(replace(/url\((['"]?)(remixicon|boxicons)/g, "url($1fonts/$2"))
+                .pipe(dest(paths.baseDistAssets + "/css/"));
         }
 
         if (vendorFonts) {
@@ -114,45 +114,45 @@ const plugins = function () {
     return Promise.resolve();
 };
 
-{%- else %}
+{% - else %}
 
 const vendorStyles = function () {
-const out = paths.baseDistAssets + "/css/";
+    const out = paths.baseDistAssets + "/css/";
 
-return src(pluginFile.vendorsCSS, {sourcemaps: true, allowEmpty: true})
-    .pipe(concat('vendors.css'))
-    .pipe(plumber()) // Checks for errors
-    .pipe(postcss(processCss))
-    .pipe(dest(out))
-    .pipe(rename({suffix: '.min'}))
-    .pipe(postcss(minifyCss)) // Minifies the result
-    .pipe(dest(out));
+    return src(pluginFile.vendorsCSS, { sourcemaps: true, allowEmpty: true })
+        .pipe(concat('vendors.css'))
+        .pipe(plumber()) // Checks for errors
+        .pipe(postcss(processCss))
+        .pipe(dest(out))
+        .pipe(rename({ suffix: '.min' }))
+        .pipe(postcss(minifyCss)) // Minifies the result
+        .pipe(dest(out));
 }
 
 const vendorScripts = function () {
     const out = paths.baseDistAssets + "/js/";
 
-    return src(pluginFile.vendorsJS, {sourcemaps: true, allowEmpty: true})
+    return src(pluginFile.vendorsJS, { sourcemaps: true, allowEmpty: true })
         .pipe(concat('vendors.js'))
         .pipe(dest(out))
         .pipe(plumber()) // Checks for errors
         .pipe(uglify()) // Minifies the js
-        .pipe(rename({suffix: '.min'}))
-        .pipe(dest(out, {sourcemaps: '.'}));
+        .pipe(rename({ suffix: '.min' }))
+        .pipe(dest(out, { sourcemaps: '.' }));
 }
 
 const plugins = function () {
-  const out = paths.baseDistAssets + "/plugins/";
-  return src(npmdist(), { base: "./node_modules" })
-    .pipe(rename(function (path) {
-      path.dirname = path.dirname.replace(/\/dist/, '').replace(/\\dist/, '');
-    }))
-    .pipe(dest(out));
+    const out = paths.baseDistAssets + "/plugins/";
+    return src(npmdist(), { base: "./node_modules" })
+        .pipe(rename(function (path) {
+            path.dirname = path.dirname.replace(/\/dist/, '').replace(/\\dist/, '');
+        }))
+        .pipe(dest(out));
 };
-{%- endif %}
+{% - endif %}
 
 
-{%- if cookiecutter.ui_library == 'Tailwind' %}
+{% - if cookiecutter.ui_library == 'Tailwind' %}
 
 const processCss = [
     tailwindcss(),
@@ -161,7 +161,7 @@ const processCss = [
 ];
 
 const minifyCss = [
-    cssnano({preset: 'default'}), // minify result
+    cssnano({ preset: 'default' }), // minify result
 ];
 
 const styles = function () {
@@ -171,7 +171,7 @@ const styles = function () {
         .pipe(plumber()) // Checks for errors
         .pipe(postcss(processCss))
         .pipe(dest(out))
-        .pipe(rename({suffix: '.min'}))
+        .pipe(rename({ suffix: '.min' }))
         .pipe(postcss(minifyCss)) // Minifies the result
         .pipe(dest(out));
 };
@@ -180,7 +180,7 @@ const watchFiles = function () {
     watch(paths.baseSrcAssets + "/css/**/*.css", series(styles));
 }
 
-{%- else %}
+{% - else %}
 
 const processCss = [
     autoprefixer(), // adds vendor prefixes
@@ -188,7 +188,7 @@ const processCss = [
 ];
 
 const minifyCss = [
-    cssnano({preset: 'default'}), // minify result
+    cssnano({ preset: 'default' }), // minify result
 ];
 
 const styles = function () {
@@ -204,7 +204,7 @@ const styles = function () {
         .pipe(plumber()) // Checks for errors
         .pipe(postcss(processCss))
         .pipe(dest(out))
-        .pipe(rename({suffix: '.min'}))
+        .pipe(rename({ suffix: '.min' }))
         .pipe(postcss(minifyCss)) // Minifies the result
         .pipe(dest(out));
 };
@@ -223,7 +223,7 @@ const rtl = function () {
         .pipe(postcss(processCss))
         .pipe(dest(out))
         .pipe(rtlcss())
-        .pipe(rename({suffix: "-rtl.min"}))
+        .pipe(rename({ suffix: "-rtl.min" }))
         .pipe(postcss(minifyCss)) // Minifies the result
         .pipe(dest(out));
 };
@@ -232,49 +232,49 @@ function watchFiles() {
     watch(paths.baseSrcAssets + "/scss/**/*.scss", series(styles));
 }
 
-{%- endif %}
+{% - endif %}
 
 
 // Production Tasks
 exports.default = series(
     plugins,
-    {%- if cookiecutter.has_plugins_config == 'n' %}
-        vendorStyles,
-        vendorScripts,
-    {%- endif %}
-    parallel(styles),
+    {% - if cookiecutter.has_plugins_config == 'n' %}
+vendorStyles,
+    vendorScripts,
+    {% - endif %}
+parallel(styles),
     parallel(watchFiles)
 );
 
 // Build Tasks
 exports.build = series(
     plugins,
-    {%- if cookiecutter.has_plugins_config == 'n' %}
-        vendorStyles,
-        vendorScripts,
-    {%- endif %}
-    parallel(styles),
+    {% - if cookiecutter.has_plugins_config == 'n' %}
+vendorStyles,
+    vendorScripts,
+    {% - endif %}
+parallel(styles),
 );
 
-{%- if cookiecutter.ui_library == 'Bootstrap' %}
+{% - if cookiecutter.ui_library == 'Bootstrap' %}
 // RTL Tasks
 exports.rtl = series(
     plugins,
-    {%- if cookiecutter.has_plugins_config == 'n' %}
-        vendorStyles,
-        vendorScripts,
-    {%- endif %}
-    parallel(rtl),
+    {% - if cookiecutter.has_plugins_config == 'n' %}
+vendorStyles,
+    vendorScripts,
+    {% - endif %}
+parallel(rtl),
     parallel(watchFiles),
 );
 
 // RTL Build Tasks
 exports.rtlBuild = series(
     plugins,
-    {%- if cookiecutter.has_plugins_config == 'n' %}
-        vendorStyles,
-        vendorScripts,
-    {%- endif %}
-    parallel(rtl),
+    {% - if cookiecutter.has_plugins_config == 'n' %}
+vendorStyles,
+    vendorScripts,
+    {% - endif %}
+parallel(rtl),
 );
-{%- endif %}
+{% - endif %}
