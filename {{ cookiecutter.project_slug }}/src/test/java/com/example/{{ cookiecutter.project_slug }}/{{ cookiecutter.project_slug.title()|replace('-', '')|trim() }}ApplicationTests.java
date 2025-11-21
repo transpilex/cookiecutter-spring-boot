@@ -4,7 +4,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class ProjectNameApplicationTests {
+class {{ cookiecutter.project_slug.title()|replace('-', '')|trim() }}ApplicationTests {
 
 	@Test
 	void contextLoads() {
