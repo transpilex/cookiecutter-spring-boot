@@ -1,5 +1,4 @@
 import json
-import shutil
 from pathlib import Path
 
 TERMINATOR = "\x1b[0m"
@@ -7,12 +6,6 @@ WARNING = "\x1b[1;33m [WARNING]: "
 INFO = "\x1b[1;33m [INFO]: "
 HINT = "\x1b[3;33m"
 SUCCESS = "\x1b[1;32m [SUCCESS]: "
-
-
-# def remove_auth_files():
-#     auth_dir_path = Path("{{cookiecutter.project_slug}}", "templates", "account")
-#     if auth_dir_path.exists():
-#         shutil.rmtree(auth_dir_path)
 
 
 def remove_gulp_files():
@@ -133,9 +126,6 @@ def main():
         handle_js_runner(
             "{{ cookiecutter.frontend_pipeline }}", "{{ cookiecutter.ui_library }}"
         )
-
-    # if "{{ cookiecutter.use_auth }}".lower() == "n":
-    #     remove_auth_files()
 
     print(SUCCESS + "Project initialized, keep up the good work!" + TERMINATOR)
 
