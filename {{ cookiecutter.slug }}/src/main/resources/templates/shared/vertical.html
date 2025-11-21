@@ -5,7 +5,9 @@
 
 <head>
     <th:block layout:fragment="page-meta"/>
+
     <th:block layout:fragment="styles"/>
+
     <th:block th:replace="~{partials/head-css :: head-css}" />
 </head>
 
@@ -15,13 +17,15 @@
 
 <div class="wrapper">
 
-    <th:block th:replace="~{partials/sidenav :: sidenav}"/>
-
     <th:block th:replace="~{partials/topbar :: topbar}"/>
+    
+    <th:block th:replace="~{partials/sidenav :: sidenav}"/>
 
     <div class="content-page">
 
-        <th:block layout:fragment="content" th:remove="tag"></th:block>
+        <div class="container-fluid">
+            <th:block layout:fragment="content" th:remove="tag"></th:block>
+        </div>
 
         <th:block th:replace="~{partials/footer :: footer}"/>
 
@@ -35,7 +39,7 @@
 
 <th:block th:replace="~{partials/footer-scripts :: footer-scripts}"/>
 
-<th:block layout:fragment="javascripts"/>
+<th:block layout:fragment="scripts"/>
 
 </body>
 
