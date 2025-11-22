@@ -8,7 +8,7 @@
 
     <th:block layout:fragment="styles"/>
 
-    <th:block th:replace="~{partials/head-css :: head-css}" />
+    <th:block th:replace="~{shared/partials/head-css :: head-css}" />
 </head>
 
 <body>
@@ -17,9 +17,9 @@
 
 <div class="wrapper">
 
-    <th:block th:replace="~{partials/topbar :: topbar}"/>
+    <th:block th:replace="~{shared/partials/topbar :: topbar}"/>
     
-    <th:block th:replace="~{partials/sidenav :: sidenav}"/>
+    <th:block th:replace="~{shared/partials/sidenav :: sidenav}"/>
 
     <div class="content-page">
 
@@ -27,7 +27,7 @@
             <th:block layout:fragment="content" th:remove="tag"></th:block>
         </div>
 
-        <th:block th:replace="~{partials/footer :: footer}"/>
+        <th:block th:replace="~{shared/partials/footer :: footer}"/>
 
     </div>
 
@@ -35,9 +35,9 @@
 
 </div>
 
-<th:block th:replace="~{partials/customizer :: customizer}"/>
+<th:block th:replace="~{shared/partials/customizer :: customizer}"/>
 
-<th:block th:replace="~{partials/footer-scripts :: footer-scripts}"/>
+<th:block th:replace="~{shared/partials/footer-scripts :: footer-scripts}"/>
 
 <th:block layout:fragment="scripts"/>
 
