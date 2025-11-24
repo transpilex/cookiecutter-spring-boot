@@ -1,19 +1,20 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+    th:fragment="base(title)">
 
 <head>
-    <th:block layout:fragment="title-meta"/>
-    
-    <th:block layout:fragment="styles"/>
+    <th:block th:replace="~{shared/partials/title-meta :: title-meta(title=${title})}" />
+
+    <th:block layout:fragment="styles" />
 
     <th:block th:replace="~{shared/partials/head-css :: head-css}" />
 </head>
 
 <body>
 
-<th:block layout:fragment="content" th:remove="tag"></th:block>
+    <th:block layout:fragment="content" th:remove="tag"></th:block>
 
-<th:block layout:fragment="scripts"/>
+    <th:block layout:fragment="scripts" />
 
 </body>
 
