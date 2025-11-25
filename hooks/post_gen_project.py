@@ -8,6 +8,35 @@ HINT = "\x1b[3;33m"
 SUCCESS = "\x1b[1;32m [SUCCESS]: "
 
 
+def configure_layout_files(ui_library):
+    bs_files = [
+        "src/main/resources/templates/shared/horizontal.html",
+        "src/main/resources/templates/shared/vertical.html",
+    ]
+    tw_files = [
+        "src/main/resources/templates/shared/horizontal-tw.html",
+        "src/main/resources/templates/shared/vertical-tw.html",
+    ]
+
+    if ui_library == "Tailwind":
+        for file in bs_files:
+            p = Path(file)
+            if p.exists():
+                p.unlink()
+
+        for file in tw_files:
+            p = Path(file)
+            if p.exists():
+                new_name = p.with_name(p.name.replace("-tw", ""))
+                p.rename(new_name)
+
+    elif ui_library == "Bootstrap":
+        for file in tw_files:
+            p = Path(file)
+            if p.exists():
+                p.unlink()
+
+
 def remove_gulp_files():
     file_names = ["gulpfile.js"]
     for file_name in file_names:
@@ -126,6 +155,9 @@ def main():
         handle_js_runner(
             "{{ cookiecutter.frontend_pipeline }}", "{{ cookiecutter.ui_library }}"
         )
+
+    if "{{ cookiecutter.ui_library }}" != "None":
+        configure_layout_files("{{ cookiecutter.ui_library }}")
 
     print(SUCCESS + "Project initialized, keep up the good work!" + TERMINATOR)
 
