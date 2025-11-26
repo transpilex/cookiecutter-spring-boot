@@ -17,7 +17,7 @@ Now run it against this repo:
 
     uvx cookiecutter https://github.com/transpilex/cookiecutter-spring-boot.git
 
-You'll be prompted for some values. Provide them, then a Django project will be created for you.
+You'll be prompted for some values. Provide them, then a project will be created for you.
 
 Answer the prompts with your own desired [options] For example:
 
