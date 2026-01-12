@@ -17,15 +17,3 @@ if slug_regex.match(slug) is None:
         f"'{slug}' is not a valid project slug. "
         "It must contain only lowercase letters, numbers or hyphens (-)."
     )
-
-def to_pascal(s):
-    return ''.join(word.capitalize() for word in re.split(r'[-_]', s))
-
-context = {
-    "application_class": f"{to_pascal(slug)}Application",
-    "application_class_tests": f"{to_pascal(slug)}ApplicationTests"
-}
-
-# inject values into cookiecutter context
-for k, v in context.items():
-    globals()[k] = v
