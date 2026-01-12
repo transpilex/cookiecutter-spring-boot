@@ -1,10 +1,9 @@
 {
   "name": "My Awesome Project",
   "slug": "{{ cookiecutter.name.lower()|replace(' ', '-')|replace('.', '-')|trim() }}",
-  "application_class": "{{ cookiecutter.slug.title()|replace('-', '')|trim() }}Application",
-  "application_class_tests": "{{ cookiecutter.application_class }}Tests",
   "description": "",
   "version": "1.0.0",
+  "application_class": "{{ cookiecutter.slug.title()|replace('-', '')|trim() }}Application",
   "ui_library": [
     "None",
     "Bootstrap",
