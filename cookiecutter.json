@@ -1,8 +1,8 @@
 {
   "name": "My Awesome Project",
   "slug": "{{ cookiecutter.name.lower()|replace(' ', '-')|replace('.', '-')|trim() }}",
-  "_application_class": "{{ cookiecutter.slug.title()|replace('-', '')|trim() }}Application",
-  "_application_class_tests": "{{ cookiecutter._application_class }}Tests",
+  "application_class": "{{ cookiecutter.slug.title()|replace('-', '')|trim() }}Application",
+  "application_class_tests": "{{ cookiecutter.application_class }}Tests",
   "description": "",
   "version": "1.0.0",
   "ui_library": [
