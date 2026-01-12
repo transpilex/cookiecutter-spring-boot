@@ -31,6 +31,7 @@ Answer the prompts with your own desired [options] For example:
     slug [reddit_clone]: reddit
     description []: A reddit clone.
     version [1.0.0]: 0.0.1
+    application_class [RedditCloneApplication]: RedditCloneApplication
     Select ui_library:
     1 - None
     2 - Bootstrap
