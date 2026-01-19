@@ -82,8 +82,7 @@ def handle_js_runner(frontend_pipeline, ui_library):
                 "sass",
                 "gulp-sass",
                 "gulp-uglify-es",
-                "node-sass-tilde-importer",
-                "gulp-rtlcss",
+                "node-sass-tilde-importer"
             ]
         else:
             scripts = {
@@ -114,7 +113,7 @@ def handle_js_runner(frontend_pipeline, ui_library):
                 "gulp-npm-dist",
                 "gulp-postcss",
                 "gulp-rename",
-                "gulp-replacegulp-rtlcss",
+                "gulp-replace",
                 "gulp-sass",
                 "gulp-uglify-es",
                 "node-sass-tilde-importer",
@@ -134,7 +133,7 @@ def handle_js_runner(frontend_pipeline, ui_library):
                 "gulp-npm-dist",
                 "gulp-postcss",
                 "gulp-rename",
-                "gulp-replacegulp-rtlcss",
+                "gulp-replace",
                 "gulp-sass",
                 "gulp-uglify-es",
                 "node-sass-tilde-importer",
